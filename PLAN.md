@@ -201,17 +201,17 @@ Package rules for future kits:
 - [x] Every function above has tests, covering each case in the "strict parsers" comments across the five repos
 - [x] `LiveOpsCore` imports only Foundation
 
-## [ ] Section 3 — LiveOpsCore: parameters and readings
+## [x] Section 3 — LiveOpsCore: parameters and readings
 
 **Goal.** One description of "a parameter this build reads", used by apps, tests and the CLI.
 
-- [ ] `LiveOpsParameter`: `name`, `type` (`.instant`, `.day`, `.bool`, `.int(ClosedRange<Int>)`) and `bundled` (spelled the way the console spells it). `Codable` so it can appear in the manifest.
-- [ ] `Reading`: `.unset`, `.applied(String)`, `.malformed`, `.outOfRange(ClosedRange<Int>)`. The last case comes from Huefall and Wordfell, so the tooling can tell "not a number" apart from "outside the bounds". Apps still treat both as malformed.
-- [ ] `read(_ raw: String?) -> Reading`
-- [ ] Key-list helpers: a stable, de-duplicated `keys` list from `[LiveOpsParameter]`, and validation that every name is `isValid` and at most 256 characters
+- [x] `LiveOpsParameter`: `name`, `type` (`.instant`, `.day`, `.bool`, `.int(ClosedRange<Int>)`) and `bundled` (spelled the way the console spells it). Its JSON coding lives with the manifest (Section 9), so there is one schema.
+- [x] `Reading`: `.unset`, `.applied(String)`, `.malformed`, `.outOfRange(ClosedRange<Int>)`. The last case comes from Huefall and Wordfell, so the tooling can tell "not a number" apart from "outside the bounds". Apps still treat both as malformed.
+- [x] `read(_ raw: String?) -> Reading`
+- [x] Key-list helpers: a stable, de-duplicated `keys` list from `[LiveOpsParameter]`, and validation that every name is `isValid` and at most 256 characters
 
 **Done when**
-- [ ] A table-driven test covers every reading for every value type
+- [x] A table-driven test covers every reading for every value type
 
 ## [ ] Section 4 — LiveOpsCore: resolution
 

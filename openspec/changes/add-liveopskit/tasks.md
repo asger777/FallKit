@@ -6,7 +6,7 @@
 ## 2. LiveOpsCore (PLAN §2–4)
 
 - [x] 2.1 Kinds, keys, strict parsers, LiveOpsDay
-- [ ] 2.2 Parameters and readings
+- [x] 2.2 Parameters and readings
 - [ ] 2.3 Docs/semantics.md from the five apps
 - [ ] 2.4 Switches, numbers, windows, phases and disabled policies
 
