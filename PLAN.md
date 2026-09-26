@@ -240,21 +240,21 @@ Package rules for future kits:
 - [x] The resolution functions cover what the five apps do: S events and promos, L events, features and placements, B events and ad policy, H seasons, W collections and features. This was checked against the migration map from the 2026-09-26 read of all five apps; the map is written up as `Docs/migration.md` in Section 11.
   > Every former gap is covered: L's context-dependent bundled flags (`bundled:` at the call site), H's disabled-closes (`.closed`), W's "today" (`LiveOpsDay(date:calendar:)`), and instant vs day ends (`LiveOpsWindowEnd`). Two items stay app-side: H renames its own `LiveOpsSwitch` enum to avoid a name clash, and H bridges `LocalDate` ↔ `LiveOpsDay`.
 
-## [ ] Section 5 — LiveOpsStore: holder and fetch policy
+## [x] Section 5 — LiveOpsStore: holder and fetch policy
 
 **Goal.** Rules #1 (last activation applies, including offline), #5 (fetch policy) and #6 (no fetch in synthetic runs).
 
-- [ ] `@MainActor protocol LiveOpsProviding: AnyObject { var current: LiveOpsValues { get }; func fetch(onActivated: @escaping @MainActor () -> Void) }`
-- [ ] `@Observable @MainActor final class LiveOpsStore`:
+- [x] `@MainActor protocol LiveOpsProviding: AnyObject { var current: LiveOpsValues { get }; func fetch(onActivated: @escaping @MainActor () -> Void) }`
+- [x] `@Observable @MainActor final class LiveOpsStore`:
   - `values`, `attach(provider:)`, `fetch()`, `apply(values:)`
   - a single `onChange` closure, as in all five apps (design decision 8)
   - it is **not** a singleton; each app keeps its own `shared`
-- [ ] `LiveOpsGate.shouldFetch(arguments:environment:isTestHost:blockedArguments:blockedEnvironment:blockedPrefixes:)`
-- [ ] `LiveOpsGate.isTestHost`: true when an `XCTestCase` class exists **or** `XCTestConfigurationFilePath` is set (the union of the five apps' checks)
-- [ ] The fetch never blocks and never surfaces an error. Failures go to an injected `log: (String) -> Void`.
+- [x] `LiveOpsGate.shouldFetch(_ launch: LaunchContext, policy: Policy)`, where `Policy` holds blocked arguments, blocked prefixes and blocked flags (`FLAG=1` or `-FLAG`); plus `LiveOpsStore.start(allowed:make:)`, which is idempotent
+- [x] `LiveOpsGate.isTestHost`: true when an `XCTestCase` class exists **or** `XCTestConfigurationFilePath` is set (the union of the five apps' checks)
+- [x] The fetch never blocks and never surfaces an error. Failures go to an injected `log: (String) -> Void` (in the transport, Section 6).
 
 **Done when**
-- [ ] Tests with a fake provider cover:
+- [x] Tests with a fake provider cover:
   - bundled values before the first activation;
   - activation then apply;
   - observer order;

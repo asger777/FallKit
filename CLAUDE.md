@@ -13,7 +13,7 @@ through its own plan in its own repo.
 ## Public repo
 
 Never commit secrets, API keys, `.p8` files, team IDs, Firebase project IDs, App Store app IDs or
-account emails. Anything app-specific is passed in as an argument or read from a local file that
+account emails. Never print or log `ProcessInfo.environment` in tests or tooling: it can hold local session tokens. Anything app-specific is passed in as an argument or read from a local file that
 is not in the repo (`~/.appstoreconnect/asc_token.rb` for App Store Connect tokens).
 
 ## Architecture rules

@@ -57,3 +57,12 @@ These stay in each app:
 - The order of the key list.
 - The launch arguments that block fetching.
 - The foreground `fetch()` call.
+
+## Test hosts
+
+| Runner | `XCTestCase` class loaded | `XCTestConfigurationFilePath` | `LiveOpsGate.isTestHost` |
+|---|---|---|---|
+| An app's Xcode test host (XCTest or Swift Testing) | yes | yes | true |
+| `swift test` in this package (swiftpm-testing-helper) | no | no | false |
+
+The kit's own tests never build a transport, so the second row is harmless. App test hosts behave the same as today.
