@@ -20,7 +20,7 @@
 
 - [x] 4.1 Conformance suite ported from S, L, B, H, W; golden fixtures
 - [x] 4.2 Manifest, liveops CLI, liveops.sh
-- [ ] 4.3 check-boundary.sh with self-test
+- [x] 4.3 check-boundary.sh with self-test
 
 ## 5. Docs, gate, release (PLAN §11–13)
 

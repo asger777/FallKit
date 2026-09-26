@@ -339,15 +339,15 @@ Package rules for future kits:
 - [x] CLI tests pass against the Section 8 fixtures
 - [x] `--help` documents every flag, and the README shows one example run
 
-## [ ] Section 10 — SDK boundary check
+## [x] Section 10 — SDK boundary check
 
 **Goal.** One script replaces S's and L's shell checks and B's, H's and W's source-scanning tests.
 
-- [ ] `Scripts/check-boundary.sh <source-dir>... [--module FirebaseRemoteConfig]...` fails if any Swift file under the given directories imports a listed module. For apps the expected count is **zero**, since the kit is now the importer.
-- [ ] Self-test against fixture folders: one clean, one violating
+- [x] `Scripts/check-boundary.sh <source-dir>... [--module FirebaseRemoteConfig]...` fails if any Swift file under the given directories imports a listed module. For apps the expected count is **zero**, since the kit is now the importer.
+- [x] Self-test (`Scripts/check-boundary-selftest.sh`), in temporary folders: a clean tree; six import forms (`@testable`, `@_exported`, access modifiers, `import struct`); look-alike modules; `--allow`; `--module`; usage errors; and this repo itself
 
 **Done when**
-- [ ] The script and its self-test pass and are included in `ci-local.sh`
+- [x] The script and its self-test pass. They are included in `ci-local.sh` in Section 12.
 
 ## [ ] Section 11 — Documentation and OpenSpec
 
