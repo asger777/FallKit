@@ -19,7 +19,7 @@
 ## 4. Proof and tooling (PLAN §8–10)
 
 - [x] 4.1 Conformance suite ported from S, L, B, H, W; golden fixtures
-- [ ] 4.2 Manifest, liveops CLI, liveops.sh
+- [x] 4.2 Manifest, liveops CLI, liveops.sh
 - [ ] 4.3 check-boundary.sh with self-test
 
 ## 5. Docs, gate, release (PLAN §11–13)

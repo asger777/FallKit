@@ -314,27 +314,30 @@ Package rules for future kits:
 - [x] About 60 or more tests are green (99 tests, 250+ cases with the parameterised arguments)
 - [x] Line coverage of LiveOpsCore and LiveOpsStore is at least 90%, via `swift test --enable-code-coverage` (98.9%)
 
-## [ ] Section 9 — `liveops` CLI
+## [x] Section 9 — `liveops` CLI
 
 **Goal.** Replace five near-copies of `run.sh` + `main.swift` with one generic tool. Today each app's CLI compiles the app's own sources. The kit's CLI reads a **manifest** instead.
 
-- [ ] `Docs/manifest.md`: the `liveops-manifest.json` v1 schema:
+- [x] `Docs/manifest.md`: the `liveops-manifest.json` v1 schema:
   - parameters (name, type, bundled, bounds);
   - windows (kind, id, bundled start and end);
   - an optional In-App Event reference.
 
   Each app will generate this file from a unit test, as part of its adoption plan.
-- [ ] `liveops values --manifest <file> --template <file>` prints a table of name, type, bundled value, console value, reading and effective value
-- [ ] `liveops check-inapp-events --manifest <file> --template <file> --app-events <file>` exits 1 when an In-App Event's dates don't match the effective window (rule #11)
-- [ ] `Scripts/liveops.sh --project <firebase-project> --app-id <asc-id> --manifest <file> <command>`:
+- [x] `liveops values --manifest <file> --template <file>` prints a table of name, type, bundled value, console value, reading and effective value
+- [x] `liveops check-inapp-events --manifest <file> --template <file> --app-events <file>` exits 1 when an In-App Event's dates don't match the effective window (rule #11)
+- [x] `Scripts/liveops.sh --project <firebase-project> --app-id <asc-id> --manifest <file> <command>`:
   - fetches the template with `firebase remoteconfig:get` (read-only);
   - fetches app events with `GET /v1/apps/<id>/appEvents`, using a token from the existing local `~/.appstoreconnect/asc_token.rb`, which is never copied into the repo;
   - then runs the CLI.
-- [ ] Neither the CLI nor the script can write to a console
+- [x] Neither the CLI nor the script can write to a console
+
+- [x] Added `liveops validate --manifest <file>`, which exits 1 on problems
+- [x] Day windows' In-App Events are listed as "not checked"; `Docs/manifest.md` records the limitation
 
 **Done when**
-- [ ] CLI tests pass against the Section 8 fixtures
-- [ ] `--help` documents every flag, and the README shows one example run
+- [x] CLI tests pass against the Section 8 fixtures
+- [x] `--help` documents every flag, and the README shows one example run
 
 ## [ ] Section 10 — SDK boundary check
 

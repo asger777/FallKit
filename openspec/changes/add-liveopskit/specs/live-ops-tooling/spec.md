@@ -15,11 +15,22 @@
 - **THEN** its reading prints as out of range and its effective value is the bundled one
 
 ### Requirement: In-App Event dates match effective windows
-`liveops check-inapp-events` MUST exit with status 1, and name each mismatch, when an In-App Event referenced by a window has dates that differ from that window's effective start or end.
+`liveops check-inapp-events` MUST exit with status 1, and name each mismatch, when an In-App Event accompanying an instant window has a schedule whose dates differ from the window's effective start or end, has no schedule, or is still active while the window is disabled. Events accompanying day windows MUST be listed as not checked.
 
 #### Scenario: Console moved the end
 - **WHEN** the console extends a window's end and the In-App Event still has the bundled end
 - **THEN** the command lists that event and exits 1
+
+#### Scenario: Disabled window
+- **WHEN** the console disables a window and its In-App Event is `PUBLISHED`
+- **THEN** the command reports it and exits 1, and an `ARCHIVED` event passes
+
+### Requirement: Manifests can be validated
+`liveops validate --manifest <file>` MUST print every problem `LiveOpsManifest.problems` finds and exit 1 when there is any, and exit 2 when the file does not decode.
+
+#### Scenario: Bundled value outside its bounds
+- **WHEN** an integer parameter's bundled value is outside its bounds
+- **THEN** the command names the parameter and exits 1
 
 ### Requirement: Tooling is read-only
 The `liveops` CLI and `Scripts/liveops.sh` MUST NOT write to a Firebase console or to App Store Connect.
