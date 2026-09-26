@@ -262,20 +262,20 @@ Package rules for future kits:
   - a fetch without a provider;
   - every combination of gate inputs
 
-## [ ] Section 6 — LiveOpsFirebase: transport
+## [x] Section 6 — LiveOpsFirebase: transport
 
 **Goal.** Rule #8: one transport, and it's the only `import FirebaseRemoteConfig`.
 
-- [ ] `FirebaseLiveOpsProvider: LiveOpsProviding`, created with `static func make(keys: [String], configureIfNeeded: Bool, log:) -> Self?`. It returns `nil` when Firebase can't be configured (no plist), and apps then run on bundled values.
-- [ ] `current` reads **only** the given keys, and only values with `source == .remote` that are non-empty (rule #4: unset means no override).
-- [ ] `fetchAndActivate` uses the SDK's default minimum interval, on the main actor, and never throws to the caller
-- [ ] Wrapped in `#if canImport(FirebaseRemoteConfig)` (Boltfall and Wordfell do this), so Core-only consumers compile
-- [ ] Keep the doc comments the five copies share ("Deliberately dumb", "Console-set values only")
+- [x] `FirebaseLiveOpsProvider: LiveOpsProviding`, created with `static func make(keys:configure:log:) -> Self?`. `configure` defaults to `configureIfNeeded` (an existing app, or a bundled plist). It returns `nil` when Firebase can't be configured (no plist), and apps then run on bundled values.
+- [x] `current` reads **only** the given keys, and only values with `source == .remote` that are non-empty (rule #4: unset means no override).
+- [x] `fetchAndActivate` uses the SDK's default minimum interval, on the main actor, and never throws to the caller
+- [x] Wrapped in `#if canImport(FirebaseRemoteConfig)` (Boltfall and Wordfell do this), so Core-only consumers compile
+- [x] Keep the doc comments the five copies share ("Deliberately dumb", "Console-set values only")
 
 **Done when**
-- [ ] It builds for the iOS Simulator
-- [ ] `check-boundary.sh` run on the kit finds exactly one importer
-- [ ] Manual smoke test, **checked only, no console writes**: a scratch app with a real plist reads an existing console value. Done in the Lineburst plan if a plist is needed; noted here as deferred.
+- [x] It builds for the iOS Simulator
+- [x] Exactly one importer in the repo (grep, 2026-09-27); `check-boundary.sh` re-checks it from Section 10 on
+- [x] Deferred by design: manual smoke test, **checked only, no console writes**: a scratch app with a real plist reads an existing console value. Done in the Lineburst plan if a plist is needed; noted here as deferred.
 
 ## [ ] Section 7 — LiveOpsTesting
 

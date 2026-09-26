@@ -12,8 +12,8 @@
 
 ## 3. LiveOpsStore and transport (PLAN §5–7)
 
-- [ ] 3.1 Providing protocol, store, gate
-- [ ] 3.2 FirebaseLiveOpsProvider
+- [x] 3.1 Providing protocol, store, gate
+- [x] 3.2 FirebaseLiveOpsProvider
 - [ ] 3.3 LiveOpsTesting fakes and fixture loader
 
 ## 4. Proof and tooling (PLAN §8–10)
