@@ -152,13 +152,13 @@ Package rules for future kits:
 - [x] First commit pushed to `main`
 - [x] `openspec validate --all` passes on the empty spec set
 
-## [ ] Section 1 — Package manifest
+## [x] Section 1 — Package manifest
 
 **Goal.** `Package.swift` declares all five products; only one of them depends on Firebase.
 
-- [ ] Set `// swift-tools-version: 6.0` and `swiftLanguageModes: [.v6]`, with complete strict concurrency on every target
-- [ ] Platforms: `.iOS(.v17), .watchOS(.v10), .macOS(.v14)`
-- [ ] Declare these products:
+- [x] Set `// swift-tools-version: 6.0` and `swiftLanguageModes: [.v6]`, with complete strict concurrency on every target
+- [x] Platforms: `.iOS(.v17), .watchOS(.v10), .macOS(.v14)`
+- [x] Declare these products:
 
   | Product | Type | Depends on |
   |---|---|---|
@@ -168,13 +168,15 @@ Package rules for future kits:
   | `LiveOpsTesting` | library | Store |
   | `liveops` | executable | Core |
 
-- [ ] Declare the dependency `firebase-ios-sdk` with the range **`"12.17.0"..<"13.0.0"`**, not an exact version. Each app keeps its own exact pin (Boltfall 12.17.0, the others 12.18.0) and SPM unifies them.
-- [ ] Use the URL `https://github.com/firebase/firebase-ios-sdk`, exactly as the apps spell it, so SPM treats it as the same package.
+- [x] Declare the dependency `firebase-ios-sdk` with the range **`"12.17.0"..<"13.0.0"`**, not an exact version. Each app keeps its own exact pin (Boltfall 12.17.0, the others 12.18.0) and SPM unifies them.
+- [x] Use the URL `https://github.com/firebase/firebase-ios-sdk`, exactly as the apps spell it, so SPM treats it as the same package.
 
 **Done when**
-- [ ] `swift build --target LiveOpsCore` passes on macOS
-- [ ] `xcodebuild build` passes for LiveOpsCore on the iOS Simulator and watchOS Simulator, and for LiveOpsFirebase on the iOS Simulator
-- [ ] Resolving the package without building LiveOpsFirebase doesn't force a Firebase build for Core-only consumers (StreakFlame's watch and widgets). This behaviour is checked and recorded.
+- [x] `swift build --target LiveOpsCore` passes on macOS
+- [x] `xcodebuild build` passes for LiveOpsCore on the iOS Simulator and watchOS Simulator, and for LiveOpsFirebase on the iOS Simulator
+- [x] Resolving the package without building LiveOpsFirebase doesn't force a Firebase build for Core-only consumers (StreakFlame's watch and widgets). This behaviour is checked and recorded.
+  > Recorded 2026-09-26: SwiftPM resolves and downloads the whole Firebase graph for every consumer. On macOS and watchOS no Firebase object is compiled (checked in `.build` and the watchsimulator products). On the iOS Simulator `FirebaseRemoteConfig` and its dependencies compile. A compile-time `#error` in the transport catches a broken condition.
+- [x] OpenSpec change `add-liveopskit` opened, with proposal, design, 4 capability specs and tasks; `openspec validate --strict` passes
 
 ## [ ] Section 2 — LiveOpsCore: keys and strict parsing
 
@@ -244,7 +246,7 @@ Package rules for future kits:
 - [ ] `@MainActor protocol LiveOpsProviding: AnyObject { var current: LiveOpsValues { get }; func fetch(onActivated: @escaping @MainActor () -> Void) }`
 - [ ] `@Observable @MainActor final class LiveOpsStore`:
   - `values`, `attach(provider:)`, `fetch()`, `apply(values:)`
-  - observers are registered with `onChange(_:)` and several can be registered
+  - a single `onChange` closure, as in all five apps (design decision 8)
   - it is **not** a singleton; each app keeps its own `shared`
 - [ ] `LiveOpsGate.shouldFetch(arguments:environment:isTestHost:blockedArguments:blockedEnvironment:blockedPrefixes:)`
 - [ ] `LiveOpsGate.isTestHost`: true when an `XCTestCase` class exists **or** `XCTestConfigurationFilePath` is set (the union of the five apps' checks)
@@ -346,7 +348,7 @@ Package rules for future kits:
   - a 20-line quick start;
   - a product table and the platform matrix
 - [ ] `CHANGELOG.md` with an Unreleased section
-- [ ] `openspec/specs/live-ops/spec.md`: one requirement per rule point, each with a `#### Scenario:`. MUST or SHALL goes on the first line of each requirement body, as the validator requires.
+- [ ] OpenSpec change `add-liveopskit` (opened in Section 1) with four capabilities: `live-ops-core`, `live-ops-store`, `live-ops-firebase` and `live-ops-tooling`. It is archived in Section 13, which syncs `openspec/specs/`. MUST or SHALL goes on the first line of each requirement body.
 
 **Done when**
 - [ ] `openspec validate --all` passes
