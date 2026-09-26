@@ -364,18 +364,22 @@ Package rules for future kits:
 - [x] `openspec validate --all` passes
 - [x] `Docs/migration.md` has a filled section for S, L, B, H and W
 
-## [ ] Section 12 — The local gate
+## [x] Section 12 — The local gate
 
-- [ ] `Scripts/ci-local.sh`:
+- [x] `Scripts/ci-local.sh`:
   1. `swiftlint --strict`
   2. `swift test`
   3. `xcodebuild build` for LiveOpsCore and LiveOpsStore on the iOS and watchOS Simulators, and LiveOpsFirebase on the iOS Simulator
   4. `check-boundary.sh` self-test
   5. `openspec validate --all`
-- [ ] No GitHub workflow (Asgar, 2026-09-26). `ci-local.sh` runs before every push.
+  6. added: a **public-repo hygiene** scan (emails, Google API keys, private keys, App Store and AdMob ids, plist/`.p8` files), with patterns only; verified by planting a leak
+  7. added: `shellcheck` when it is installed; `--quick` skips the simulator builds
+
+  > First full run 2026-09-27: 12 steps, 57 s, all ok.
+- [x] No GitHub workflow (Asgar, 2026-09-26). `ci-local.sh` runs before every push.
 
 **Done when**
-- [ ] `ci-local.sh` passes locally
+- [x] `ci-local.sh` passes locally
 
 ## [ ] Section 13 — Consumption check and tag 0.1.0
 
