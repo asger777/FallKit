@@ -24,6 +24,6 @@
 
 ## 5. Docs, gate, release (PLAN §11–13)
 
-- [ ] 5.1 live-ops-rule.md, migration.md, manifest.md, README, CHANGELOG
+- [x] 5.1 live-ops-rule.md, migration.md, manifest.md, README, CHANGELOG
 - [ ] 5.2 ci-local.sh
 - [ ] 5.3 ConsumerCheck app; archive this change; tag 0.1.0

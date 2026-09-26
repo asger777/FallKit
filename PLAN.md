@@ -349,20 +349,20 @@ Package rules for future kits:
 **Done when**
 - [x] The script and its self-test pass. They are included in `ci-local.sh` in Section 12.
 
-## [ ] Section 11 — Documentation and OpenSpec
+## [x] Section 11 — Documentation and OpenSpec
 
-- [ ] `Docs/live-ops-rule.md`: the canonical 12-point rule, merged from the five CLAUDE.md files. App CLAUDE.md files will link to it in their adoption plans.
-- [ ] `Docs/migration.md`: for **each of the five apps**, a table mapping its current type or function to its kit equivalent, what stays in the app, the tests that move and the tests that stay. This is the input to every adoption plan.
-- [ ] `README.md`:
+- [x] `Docs/live-ops-rule.md`: the canonical 12-point rule, merged from the five CLAUDE.md files. App CLAUDE.md files will link to it in their adoption plans.
+- [x] `Docs/migration.md`: for **each of the five apps**, a table mapping its current type or function to its kit equivalent, what stays in the app, the tests that move and the tests that stay. This is the input to every adoption plan.
+- [x] `README.md`:
   - install snippets for XcodeGen, both local `path:` and `url:` + `exactVersion:`;
-  - a 20-line quick start;
+  - a 20-line quick start (compiled for real by the Section 13 ConsumerCheck app);
   - a product table and the platform matrix
-- [ ] `CHANGELOG.md` with an Unreleased section
-- [ ] OpenSpec change `add-liveopskit` (opened in Section 1) with four capabilities: `live-ops-core`, `live-ops-store`, `live-ops-firebase` and `live-ops-tooling`. It is archived in Section 13, which syncs `openspec/specs/`. MUST or SHALL goes on the first line of each requirement body.
+- [x] `CHANGELOG.md` with an Unreleased section
+- [x] OpenSpec change `add-liveopskit` (opened in Section 1) with four capabilities: `live-ops-core`, `live-ops-store`, `live-ops-firebase` and `live-ops-tooling`. It is archived in Section 13, which syncs `openspec/specs/`. MUST or SHALL goes on the first line of each requirement body.
 
 **Done when**
-- [ ] `openspec validate --all` passes
-- [ ] `Docs/migration.md` has a filled section for S, L, B, H and W
+- [x] `openspec validate --all` passes
+- [x] `Docs/migration.md` has a filled section for S, L, B, H and W
 
 ## [ ] Section 12 — The local gate
 
