@@ -4,6 +4,7 @@
 
 **Repo.** https://github.com/asger777/FallKit (public) · local `~/Documents/GitHub/OWN/FallKit`
 **Stack.** Swift Package Manager · swift-tools 6.0 · Swift 6 language mode · iOS 17, watchOS 10, macOS 14 (macOS is only for tests and the CLI)
+**Status.** `0.1.0` released 2026-09-27. Sections 0–13 are done.
 **Consumers (later, separate plans).** Lineburst (pilot) → Boltfall → Huefall → Wordfell → StreakFlame
 
 ---
@@ -381,7 +382,7 @@ Package rules for future kits:
 **Done when**
 - [x] `ci-local.sh` passes locally
 
-## [ ] Section 13 — Consumption check and tag 0.1.0
+## [x] Section 13 — Consumption check and tag 0.1.0
 
 **Goal.** Prove an XcodeGen app can use the kit **by URL and tag**, alongside an exact Firebase pin, before Lineburst touches it.
 
@@ -390,13 +391,14 @@ Package rules for future kits:
   - with it pinned exactly to **12.17.0** (Boltfall's pin).
 - [x] It also builds a watchOS target that uses LiveOpsCore only
   > 2026-09-27, against tag `0.1.0-rc.1`: both Firebase pins resolve and build (Package.resolved checked). The iOS app compiles the README quick start word for word (`check.sh` fails if they drift apart). The watch app has 0 `FIRRemoteConfig` symbols; the iOS app has 390.
-- [ ] Update `CHANGELOG.md` and tag `0.1.0` (after Asgar's queue #5), then publish the GitHub release
+- [x] Archive OpenSpec change `add-liveopskit` (4 capabilities, 34 requirements synced to `openspec/specs/`)
+- [x] Update `CHANGELOG.md` and tag `0.1.0` (after Asgar's queue #5), then publish the GitHub release
 
 **Done when**
 - [x] Both Firebase pins resolve and build
 - [x] The watchOS target builds
-- [ ] `0.1.0` is tagged and public
-- [ ] **Hand-off:** write the Lineburst adoption plan (a separate document, in the Lineburst repo)
+- [x] `0.1.0` is tagged and public
+- [x] **Hand-off: deferred by Asgar (2026-09-26)**: "work will be here only". The Lineburst adoption plan is written in the Lineburst repo only when Asgar asks. Its inputs are ready: `Docs/migration.md` and the golden fixtures.
 
 ---
 
