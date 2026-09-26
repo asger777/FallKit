@@ -385,15 +385,16 @@ Package rules for future kits:
 
 **Goal.** Prove an XcodeGen app can use the kit **by URL and tag**, alongside an exact Firebase pin, before Lineburst touches it.
 
-- [ ] `Examples/ConsumerCheck/`: a minimal XcodeGen iOS app, with no plist, that depends on FallKit by `url:` + `exactVersion:` of a release candidate tag. It builds twice:
+- [x] `Examples/ConsumerCheck/`: a minimal XcodeGen iOS app, with no plist, that depends on FallKit by `url:` + `exactVersion:` of a release candidate tag. It builds twice:
   - with `firebase-ios-sdk` pinned exactly to **12.18.0**;
   - with it pinned exactly to **12.17.0** (Boltfall's pin).
-- [ ] It also builds a watchOS target that uses LiveOpsCore only
+- [x] It also builds a watchOS target that uses LiveOpsCore only
+  > 2026-09-27, against tag `0.1.0-rc.1`: both Firebase pins resolve and build (Package.resolved checked). The iOS app compiles the README quick start word for word (`check.sh` fails if they drift apart). The watch app has 0 `FIRRemoteConfig` symbols; the iOS app has 390.
 - [ ] Update `CHANGELOG.md` and tag `0.1.0` (after Asgar's queue #5), then publish the GitHub release
 
 **Done when**
-- [ ] Both Firebase pins resolve and build
-- [ ] The watchOS target builds
+- [x] Both Firebase pins resolve and build
+- [x] The watchOS target builds
 - [ ] `0.1.0` is tagged and public
 - [ ] **Hand-off:** write the Lineburst adoption plan (a separate document, in the Lineburst repo)
 
