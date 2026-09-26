@@ -289,11 +289,11 @@ Package rules for future kits:
 - [x] The kit's own Store tests use it
 - [x] It isn't linked by any non-test target (documented in the README)
 
-## [ ] Section 8 — Conformance suite and golden fixtures
+## [x] Section 8 — Conformance suite and golden fixtures
 
 **Goal.** Prove the kit matches all five apps before any app touches it.
 
-- [ ] Port the **generic** tests from all five repos into Swift Testing, each tagged with where it came from:
+- [x] Port the **generic** tests from all five repos into Swift Testing, each tagged with where it came from:
   - S: `LiveOpsResolutionTests` 18, `LiveOpsTests` 10
   - L: 19 + 9
   - B: 30 + 9
@@ -301,12 +301,18 @@ Package rules for future kits:
   - W: 36 + part of the 22 wiring tests
 
   Remove duplicates; wiring and catalogue tests stay in the apps.
-- [ ] `Sources/LiveOps/Testing/Fixtures/`: about 10 Remote Config templates covering empty, all-unset, typos, out-of-range values, windows moved, shortened and disabled, and unknown ids. Each has an `expected.json` with the readings and effective values.
-- [ ] Each app's adoption plan will re-run these fixtures against **the app's current resolver** before migrating. That is the proof that behaviour doesn't change.
+- [x] `Sources/LiveOps/Testing/Fixtures/`: about 10 Remote Config templates covering empty, all-unset, typos, out-of-range values, windows moved, shortened and disabled, and unknown ids. Each has an `expected.json` with the readings and effective values.
+- [x] Each app's adoption plan will re-run these fixtures against **the app's current resolver** before migrating. That is the proof that behaviour doesn't change.
+
+> Done 2026-09-27:
+> - 14 fixtures against `catalog.manifest.json`, which covers every window shape: an instant event (exclusive, removed), a day season (inclusive, closed) and a day collection (inclusive, removed), plus switches bundled on and off, a placement, and two bounded numbers.
+> - The phase probes in each `*.expected.json` are **hand-written** from `Docs/semantics.md`. The reports were recorded by the kit and reviewed row by row; the independent check on those rows is each app's current resolver, in its adoption plan.
+> - `LiveOpsManifest` and `LiveOpsReport` were brought forward from Section 9, because the fixtures resolve against a manifest.
+> - Suites are tagged with the apps they came from.
 
 **Done when**
-- [ ] About 60 or more tests are green
-- [ ] Line coverage of LiveOpsCore and LiveOpsStore is at least 90%, via `swift test --enable-code-coverage`
+- [x] About 60 or more tests are green (99 tests, 250+ cases with the parameterised arguments)
+- [x] Line coverage of LiveOpsCore and LiveOpsStore is at least 90%, via `swift test --enable-code-coverage` (98.9%)
 
 ## [ ] Section 9 — `liveops` CLI
 

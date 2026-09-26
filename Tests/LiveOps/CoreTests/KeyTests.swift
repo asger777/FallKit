@@ -2,7 +2,7 @@ import LiveOpsCore
 import Testing
 
 /// Parameter naming (rule #3). Cases are the union of the five apps' key suites.
-@Suite("LiveOpsKey")
+@Suite("LiveOpsKey", .tags(.streakflame, .lineburst, .boltfall, .huefall, .wordfell))
 struct KeyTests {
     @Test("name is kind_id_field with the id sanitised", arguments: [
         (LiveOpsKind.event, "new-year-2027", "start", "event_new_year_2027_start"),        // S

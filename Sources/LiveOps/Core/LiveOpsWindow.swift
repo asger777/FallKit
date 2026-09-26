@@ -40,6 +40,14 @@ public struct LiveOpsWindowOverride<T: Comparable & Sendable>: Sendable {
 extension LiveOpsWindowOverride: Equatable where T: Equatable {}
 extension LiveOpsWindowOverride: Hashable where T: Hashable {}
 
+/// The value type of a window's bounds.
+public enum LiveOpsWindowType: String, Sendable, Codable {
+    /// ISO-8601 instants (`Date`).
+    case instant
+    /// `YYYY-MM-DD` calendar days (``LiveOpsDay``).
+    case day
+}
+
 /// Whether the end of a window is still inside it.
 public enum LiveOpsWindowEnd: String, Sendable, Codable {
     /// `start <= t < end`: instant windows (StreakFlame, Lineburst, Boltfall).

@@ -15,7 +15,7 @@ private func calendarDay(_ text: String) -> LiveOpsDay {
 }
 
 /// Instant windows, end exclusive: StreakFlame, Lineburst and Boltfall suites.
-@Suite("Instant windows")
+@Suite("Instant windows", .tags(.streakflame, .lineburst, .boltfall))
 struct InstantWindowTests {
     let bundled = LiveOpsWindow(start: instant("2026-10-01T00:00:00Z"), end: instant("2026-10-16T00:00:00Z"))
     let id = "harvest-moon"
@@ -133,7 +133,7 @@ struct InstantWindowTests {
 }
 
 /// Day windows, end inclusive: Huefall and Wordfell suites.
-@Suite("Day windows")
+@Suite("Day windows", .tags(.huefall, .wordfell))
 struct DayWindowTests {
     let bundled = LiveOpsWindow(start: calendarDay("2026-10-24"), end: calendarDay("2026-11-06"))
 

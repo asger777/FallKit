@@ -13,7 +13,7 @@ private struct Number: LiveOpsNumber {
 }
 
 /// Rule #2 (switches only switch off) and rule #12 (bounded numbers).
-@Suite("Switches and numbers")
+@Suite("Switches and numbers", .tags(.streakflame, .lineburst, .boltfall, .huefall, .wordfell))
 struct SwitchNumberTests {
     @Test("bundle only: the bundled value stands")
     func bundleOnly() {

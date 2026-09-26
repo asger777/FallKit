@@ -4,7 +4,7 @@ import LiveOpsTesting
 import Testing
 
 @MainActor
-@Suite("MemoryLiveOpsProvider")
+@Suite("MemoryLiveOpsProvider", .tags(.streakflame, .lineburst, .huefall, .boltfall, .wordfell))
 struct MemoryProviderTests {
     @Test("immediate activation completes inside fetch")
     func immediate() {
@@ -56,17 +56,19 @@ struct MemoryProviderTests {
 struct FixtureLoaderTests {
     @Test("fixtures are bundled and listed by name")
     func names() {
-        #expect(LiveOpsFixtures.names.contains("smoke"))
+        #expect(LiveOpsFixtures.names.contains("grouped"))
     }
 
     @Test("a fixture loads as console-set values only")
     func smoke() throws {
-        let template = try LiveOpsFixtures.template("smoke")
+        let template = try LiveOpsFixtures.template("grouped")
         #expect(template.values == [
             "feature_adventure_enabled": "false",
-            "event_harvest_moon_end": "2026-10-20T00:00:00Z",
+            "season_harvest_2026_end": "2026-11-30",
+            "ad_undo_free_per_run": "1",
         ])
-        #expect(template.conditionalKeys == ["event_harvest_moon_end"])
+        #expect(template.conditionalKeys.isEmpty)
+        #expect(try LiveOpsFixtures.template("conditional-only").conditionalKeys == ["feature_adventure_enabled", "ad_undo_free_per_run"])
         #expect(template.version == "6")
     }
 

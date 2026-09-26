@@ -2,7 +2,7 @@
 ///
 /// An open set rather than an enum, because the five apps use seven kinds between them.
 /// The constants cover the ones in use; an app can add its own with a string literal.
-public struct LiveOpsKind: RawRepresentable, Hashable, Sendable, ExpressibleByStringLiteral, CustomStringConvertible {
+public struct LiveOpsKind: RawRepresentable, Hashable, Sendable, Codable, ExpressibleByStringLiteral, CustomStringConvertible {
     public let rawValue: String
 
     public init(rawValue: String) { self.rawValue = rawValue }

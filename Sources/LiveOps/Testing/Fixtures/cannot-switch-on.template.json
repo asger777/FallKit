@@ -1,0 +1,1 @@
+{ "parameters": { "feature_zen_enabled": { "defaultValue": { "value": "true" } }, "feature_adventure_enabled": { "defaultValue": { "value": "yes" } } } }

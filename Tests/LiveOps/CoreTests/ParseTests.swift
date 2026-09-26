@@ -3,7 +3,7 @@ import LiveOpsCore
 import Testing
 
 /// Strict parsers (rule #4). Inputs are taken from the five apps' parser suites.
-@Suite("LiveOpsParse")
+@Suite("LiveOpsParse", .tags(.streakflame, .lineburst, .boltfall, .huefall, .wordfell))
 struct ParseTests {
     @Test("bool accepts six spellings, any case, trimmed", arguments: [
         ("true", true), ("TRUE", true), (" 1 ", true), ("yes", true), (" Yes ", true),
@@ -91,7 +91,7 @@ struct ParseTests {
     }
 }
 
-@Suite("LiveOpsDay")
+@Suite("LiveOpsDay", .tags(.huefall, .wordfell))
 struct DayTests {
     @Test("days compare as the calendar does")
     func ordering() throws {

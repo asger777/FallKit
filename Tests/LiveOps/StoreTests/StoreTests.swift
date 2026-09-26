@@ -5,7 +5,7 @@ import LiveOpsTesting
 import Testing
 
 @MainActor
-@Suite("LiveOpsStore")
+@Suite("LiveOpsStore", .tags(.streakflame, .lineburst, .boltfall, .huefall, .wordfell))
 struct StoreTests {
     @Test("without a provider the bundle stands and fetch does nothing")
     func noProvider() {
@@ -108,7 +108,7 @@ struct StoreTests {
     }
 }
 
-@Suite("LiveOpsGate")
+@Suite("LiveOpsGate", .tags(.streakflame, .lineburst, .boltfall, .huefall, .wordfell))
 struct GateTests {
     typealias Launch = LiveOpsGate.LaunchContext
 

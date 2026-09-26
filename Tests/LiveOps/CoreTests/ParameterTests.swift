@@ -3,7 +3,7 @@ import LiveOpsCore
 import Testing
 
 /// Readings (rule #4, #12). Cases from S, L, B, H and W `parameterReadings…` tests.
-@Suite("LiveOpsParameter")
+@Suite("LiveOpsParameter", .tags(.streakflame, .lineburst, .boltfall, .huefall, .wordfell))
 struct ParameterTests {
     @Test("an int parameter reads unset, applied, out of range and malformed")
     func intReadings() {
