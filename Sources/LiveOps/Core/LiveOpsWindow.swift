@@ -1,0 +1,73 @@
+import Foundation
+
+/// A bundled window: an event, season or collection runs from `start` to `end`.
+/// `T` is `Date` for instant windows (StreakFlame, Lineburst, Boltfall) or
+/// ``LiveOpsDay`` for day windows (Huefall, Wordfell).
+public struct LiveOpsWindow<T: Comparable & Sendable>: Sendable {
+    public var start: T
+    public var end: T
+
+    public init(start: T, end: T) {
+        self.start = start
+        self.end = end
+    }
+}
+
+extension LiveOpsWindow: Equatable where T: Equatable {}
+extension LiveOpsWindow: Hashable where T: Hashable {}
+
+/// What the console says about one window. Each field is read on its own, so
+/// a malformed start never takes a valid end down with it (rule #4).
+public struct LiveOpsWindowOverride<T: Comparable & Sendable>: Sendable {
+    public var start: T?
+    public var end: T?
+    /// Only `false` has an effect: an override never creates or re-enables (rule #2).
+    public var enabled: Bool?
+
+    public init(start: T? = nil, end: T? = nil, enabled: Bool? = nil) {
+        self.start = start
+        self.end = end
+        self.enabled = enabled
+    }
+
+    /// True when the console set nothing readable for this window.
+    public var isEmpty: Bool { start == nil && end == nil && enabled == nil }
+
+    /// True when the console switched this window off.
+    public var isDisabled: Bool { enabled == false }
+}
+
+extension LiveOpsWindowOverride: Equatable where T: Equatable {}
+extension LiveOpsWindowOverride: Hashable where T: Hashable {}
+
+/// Whether the end of a window is still inside it.
+public enum LiveOpsWindowEnd: String, Sendable, Codable {
+    /// `start <= t < end`: instant windows (StreakFlame, Lineburst, Boltfall).
+    case exclusive
+    /// `start <= t <= end`: day windows, where the end day is the last day (Huefall, Wordfell).
+    case inclusive
+}
+
+/// Where a moment sits relative to a window.
+public enum LiveOpsPhase: String, Sendable, Codable {
+    case upcoming
+    case live
+    case over
+}
+
+/// What `enabled=false` does to a window.
+public enum LiveOpsDisabled: String, Sendable, Codable {
+    /// The window is gone: no phase at all (StreakFlame, Lineburst, Boltfall, Wordfell).
+    case removed
+    /// The window is closed: upcoming before its start, over from its start on (Huefall).
+    case closed
+}
+
+/// The three fields every window has in the console.
+public enum LiveOpsWindowField {
+    public static let start = "start"
+    public static let end = "end"
+    public static let enabled = "enabled"
+    /// In the order the apps list them.
+    public static let all = [start, end, enabled]
+}

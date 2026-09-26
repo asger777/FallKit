@@ -213,11 +213,11 @@ Package rules for future kits:
 **Done when**
 - [x] A table-driven test covers every reading for every value type
 
-## [ ] Section 4 — LiveOpsCore: resolution
+## [x] Section 4 — LiveOpsCore: resolution
 
 **Goal.** Rules #1, #2, #4, #7 and #12 as pure, generic functions.
 
-- [ ] **4.1 Compare edge-case behaviour across the five apps first.** Write `Docs/semantics.md`, a table of how each app handles:
+- [x] **4.1 Compare edge-case behaviour across the five apps first.** Write `Docs/semantics.md`, a table of how each app handles:
   - end before start;
   - start-only or end-only overrides;
   - `enabled=true` on an item that is off in the bundle;
@@ -226,18 +226,19 @@ Package rules for future kits:
   - the "now" boundary: is the end inclusive or exclusive?
 
   The kit follows Lineburst. Any real difference gets an explicit parameter; nothing is changed silently.
-- [ ] `protocol LiveOpsSwitch: Sendable { var parameterName: String { get } }` and
+- [x] `protocol LiveOpsSwitch: Sendable { var parameterName: String { get } }` and
   `LiveOpsResolve.isEnabled(key:bundled:values:)` → `bundled && bool(values[key]) != false`, with a protocol convenience on top. The string-key form covers Wordfell's id-based features.
-- [ ] `protocol LiveOpsNumber: Sendable { parameterName; bundled; bounds }` and `value(_:values:)`. Out of range falls back to the bundled value.
-- [ ] `LiveOpsWindow<T: Comparable & Sendable>`, `LiveOpsWindowOverride<T>` (`start?`, `end?`, `enabled?`) and `Phase` (`upcoming`, `live`, `over`)
+- [x] `protocol LiveOpsNumber: Sendable { parameterName; bundled; bounds }` and `value(_:values:)`. Out of range falls back to the bundled value.
+- [x] `LiveOpsWindow<T: Comparable & Sendable>`, `LiveOpsWindowOverride<T>` (`start?`, `end?`, `enabled?`) and `Phase` (`upcoming`, `live`, `over`)
   - `windowOverride(kind:id:values:parse:)`: each field is parsed on its own, and only known ids are read
   - `effective(bundled:override:) -> LiveOpsWindow<T>?`: `nil` means disabled
   - `phase(of:at:)`: the time is always injected
-- [ ] Nothing in Core reads the clock, `ProcessInfo` or `UserDefaults`
+- [x] Nothing in Core reads the clock, `ProcessInfo` or `UserDefaults`
 
 **Done when**
-- [ ] `Docs/semantics.md` is written and every row has a test
-- [ ] The resolution functions cover what the five apps do: S events and promos, L events, features and placements, B events and ad policy, H seasons, W collections and features. This is checked against `Docs/migration.md` (Section 11).
+- [x] `Docs/semantics.md` is written and every row has a test
+- [x] The resolution functions cover what the five apps do: S events and promos, L events, features and placements, B events and ad policy, H seasons, W collections and features. This was checked against the migration map from the 2026-09-26 read of all five apps; the map is written up as `Docs/migration.md` in Section 11.
+  > Every former gap is covered: L's context-dependent bundled flags (`bundled:` at the call site), H's disabled-closes (`.closed`), W's "today" (`LiveOpsDay(date:calendar:)`), and instant vs day ends (`LiveOpsWindowEnd`). Two items stay app-side: H renames its own `LiveOpsSwitch` enum to avoid a name clash, and H bridges `LocalDate` ↔ `LiveOpsDay`.
 
 ## [ ] Section 5 — LiveOpsStore: holder and fetch policy
 

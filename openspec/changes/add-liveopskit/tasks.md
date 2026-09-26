@@ -7,8 +7,8 @@
 
 - [x] 2.1 Kinds, keys, strict parsers, LiveOpsDay
 - [x] 2.2 Parameters and readings
-- [ ] 2.3 Docs/semantics.md from the five apps
-- [ ] 2.4 Switches, numbers, windows, phases and disabled policies
+- [x] 2.3 Docs/semantics.md from the five apps
+- [x] 2.4 Switches, numbers, windows, phases and disabled policies
 
 ## 3. LiveOpsStore and transport (PLAN §5–7)
 
