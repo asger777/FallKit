@@ -178,28 +178,28 @@ Package rules for future kits:
   > Recorded 2026-09-26: SwiftPM resolves and downloads the whole Firebase graph for every consumer. On macOS and watchOS no Firebase object is compiled (checked in `.build` and the watchsimulator products). On the iOS Simulator `FirebaseRemoteConfig` and its dependencies compile. A compile-time `#error` in the transport catches a broken condition.
 - [x] OpenSpec change `add-liveopskit` opened, with proposal, design, 4 capability specs and tasks; `openspec validate --strict` passes
 
-## [ ] Section 2 — LiveOpsCore: keys and strict parsing
+## [x] Section 2 — LiveOpsCore: keys and strict parsing
 
 **Goal.** Rule #3 (naming) and rule #4 (strict, per-key parsing), shared by every app.
 
-- [ ] `LiveOpsKind`: a `String`-backed, `ExpressibleByStringLiteral` struct with common constants (`.event`, `.feature`, `.ad`, `.promo`, `.season`, `.offer`, `.collection`). Apps can add their own kinds, because the five apps use seven kinds between them.
-- [ ] `LiveOpsKey`:
+- [x] `LiveOpsKind`: a `String`-backed, `ExpressibleByStringLiteral` struct with common constants (`.event`, `.feature`, `.ad`, `.promo`, `.season`, `.offer`, `.collection`). Apps can add their own kinds, because the five apps use seven kinds between them.
+- [x] `LiveOpsKey`:
   - `name(_ kind:, id:, field:)` → `<kind>_<sanitised id>_<field>`
   - `sanitise` → any character outside `[a-zA-Z0-9_]` becomes `_`
   - `isValid` → `^[a-zA-Z][a-zA-Z0-9_]*$`
   - `snakeCase`, Boltfall's helper
-- [ ] `LiveOpsParse`:
+- [x] `LiveOpsParse`:
   - `bool`: accepts true/1/yes and false/0/no, case-insensitive and trimmed; anything else is `nil`
   - `int(_:in:)`: out of range is `nil`, never clamped
   - `instant`: ISO-8601 internet date-time with offset (S/L/B)
   - `day`: `LiveOpsDay` (H/W)
   - `instantString` / `dayString` for the tooling
-- [ ] `LiveOpsDay`: a strict `YYYY-MM-DD` calendar day, validated by a UTC round trip (so 2026-02-30 is rejected), `Comparable`, `Codable`. Huefall's `LocalDate` and Wordfell's `LiveOpsDay` map onto it in their own adoption plans.
-- [ ] Tests for every parser: valid input, whitespace, case, empty, garbage, bounds edges, invalid calendar days, offsets
+- [x] `LiveOpsDay`: a strict `YYYY-MM-DD` calendar day, validated by a UTC round trip (so 2026-02-30 is rejected), `Comparable`, `Codable`. Huefall's `LocalDate` and Wordfell's `LiveOpsDay` map onto it in their own adoption plans.
+- [x] Tests for every parser: valid input, whitespace, case, empty, garbage, bounds edges, invalid calendar days, offsets
 
 **Done when**
-- [ ] Every function above has tests, covering each case in the "strict parsers" comments across the five repos
-- [ ] `LiveOpsCore` imports only Foundation
+- [x] Every function above has tests, covering each case in the "strict parsers" comments across the five repos
+- [x] `LiveOpsCore` imports only Foundation
 
 ## [ ] Section 3 — LiveOpsCore: parameters and readings
 
