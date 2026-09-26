@@ -15,7 +15,7 @@ what an app ships with, and never create anything new. The rule the products imp
 | `LiveOpsCore` | Pure keys, parsing and resolution | Foundation |
 | `LiveOpsStore` | `@Observable` holder and fetch policy | LiveOpsCore, Observation |
 | `LiveOpsFirebase` | The Remote Config transport | LiveOpsStore, FirebaseRemoteConfig (iOS) |
-| `LiveOpsTesting` | A fake provider and golden fixtures for tests | LiveOpsStore |
+| `LiveOpsTesting` | A fake provider and golden fixtures. **Link it from test targets only.** | LiveOpsStore |
 | `liveops` | CLI: print live values, check In-App Event dates | LiveOpsCore |
 
 ## License

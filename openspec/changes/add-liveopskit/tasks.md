@@ -14,7 +14,7 @@
 
 - [x] 3.1 Providing protocol, store, gate
 - [x] 3.2 FirebaseLiveOpsProvider
-- [ ] 3.3 LiveOpsTesting fakes and fixture loader
+- [x] 3.3 LiveOpsTesting fakes and fixture loader
 
 ## 4. Proof and tooling (PLAN §8–10)
 

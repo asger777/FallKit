@@ -277,17 +277,17 @@ Package rules for future kits:
 - [x] Exactly one importer in the repo (grep, 2026-09-27); `check-boundary.sh` re-checks it from Section 10 on
 - [x] Deferred by design: manual smoke test, **checked only, no console writes**: a scratch app with a real plist reads an existing console value. Done in the Lineburst plan if a plist is needed; noted here as deferred.
 
-## [ ] Section 7 — LiveOpsTesting
+## [x] Section 7 — LiveOpsTesting
 
 **Goal.** App wiring tests stop hand-writing fakes.
 
-- [ ] `MemoryLiveOpsProvider`: set values, trigger or suppress activation, count fetches
-- [ ] Bundle the Section 8 fixtures as resources (`Sources/LiveOps/Testing/Fixtures/`) so apps' tests can load the same files
-- [ ] Fixture loading: turn a Remote Config template JSON (`firebase remoteconfig:get` format) into `LiveOpsValues`
+- [x] `MemoryLiveOpsProvider`: set values, trigger or suppress activation, count fetches
+- [x] Bundle the Section 8 fixtures as resources (`Sources/LiveOps/Testing/Fixtures/`) so apps' tests can load the same files
+- [x] Fixture loading: turn a Remote Config template JSON (`firebase remoteconfig:get` format) into `LiveOpsValues`. The parser is `LiveOpsTemplate` in **Core**, because the CLI needs it too; `LiveOpsFixtures` loads the bundled files.
 
 **Done when**
-- [ ] The kit's own Store tests use it
-- [ ] It isn't linked by any non-test target (documented in the README)
+- [x] The kit's own Store tests use it
+- [x] It isn't linked by any non-test target (documented in the README)
 
 ## [ ] Section 8 — Conformance suite and golden fixtures
 

@@ -1,36 +1,8 @@
 import Foundation
 import LiveOpsCore
 import LiveOpsStore
+import LiveOpsTesting
 import Testing
-
-/// Activation fires inside `fetch`, like the S, L and H stubs.
-@MainActor
-private final class ImmediateProvider: LiveOpsProviding {
-    var current: LiveOpsValues
-    var fetches = 0
-    init(current: LiveOpsValues = [:]) { self.current = current }
-    func fetch(onActivated: @escaping @MainActor () -> Void) {
-        fetches += 1
-        onActivated()
-    }
-}
-
-/// Activation fires later, like the B and W stubs.
-@MainActor
-private final class DeferredProvider: LiveOpsProviding {
-    var current: LiveOpsValues
-    var fetches = 0
-    private var pending: (@MainActor () -> Void)?
-    init(current: LiveOpsValues = [:]) { self.current = current }
-    func fetch(onActivated: @escaping @MainActor () -> Void) {
-        fetches += 1
-        pending = onActivated
-    }
-    func activate(_ values: LiveOpsValues) {
-        current = values
-        pending?()
-    }
-}
 
 @MainActor
 @Suite("LiveOpsStore")
@@ -50,11 +22,11 @@ struct StoreTests {
         let store = LiveOpsStore()
         var changes = 0
         store.onChange = { changes += 1 }
-        let provider = DeferredProvider(current: ["feature_adventure_enabled": "false"])
+        let provider = MemoryLiveOpsProvider(current: ["feature_adventure_enabled": "false"], activation: .deferred)
         store.attach(provider: provider)
         #expect(store.hasProvider)
         #expect(store.values == ["feature_adventure_enabled": "false"])
-        #expect(provider.fetches == 1)
+        #expect(provider.fetchCount == 1)
         #expect(changes == 0)
     }
 
@@ -63,7 +35,7 @@ struct StoreTests {
         let store = LiveOpsStore()
         var changes = 0
         store.onChange = { changes += 1 }
-        store.attach(provider: ImmediateProvider(current: ["x": "1"]))
+        store.attach(provider: MemoryLiveOpsProvider(current: ["x": "1"]))
         #expect(changes == 0)
     }
 
@@ -72,7 +44,7 @@ struct StoreTests {
         let store = LiveOpsStore()
         var changes = 0
         store.onChange = { changes += 1 }
-        let provider = DeferredProvider()
+        let provider = MemoryLiveOpsProvider(activation: .deferred)
         store.attach(provider: provider)
         provider.activate([:])
         #expect(changes == 0)
@@ -89,11 +61,11 @@ struct StoreTests {
     @Test("foreground fetch asks the provider again")
     func foregroundFetch() {
         let store = LiveOpsStore()
-        let provider = ImmediateProvider()
+        let provider = MemoryLiveOpsProvider()
         store.attach(provider: provider)
         provider.current = ["x": "2"]
         store.fetch()
-        #expect(provider.fetches == 2)
+        #expect(provider.fetchCount == 2)
         #expect(store.values == ["x": "2"])
     }
 
@@ -114,20 +86,20 @@ struct StoreTests {
     func start() {
         let store = LiveOpsStore()
         var made = 0
-        store.start(allowed: false) { made += 1; return ImmediateProvider() }
+        store.start(allowed: false) { made += 1; return MemoryLiveOpsProvider() }
         #expect(made == 0)
         #expect(!store.hasProvider)
         store.start(allowed: true) { nil }
         #expect(!store.hasProvider)
-        store.start(allowed: true) { made += 1; return ImmediateProvider(current: ["x": "1"]) }
-        store.start(allowed: true) { made += 1; return ImmediateProvider() }
+        store.start(allowed: true) { made += 1; return MemoryLiveOpsProvider(current: ["x": "1"]) }
+        store.start(allowed: true) { made += 1; return MemoryLiveOpsProvider() }
         #expect(made == 1)
         #expect(store.values == ["x": "1"])
     }
 
     @Test("a released store ignores a late activation")
     func releasedStore() {
-        let provider = DeferredProvider()
+        let provider = MemoryLiveOpsProvider(activation: .deferred)
         var store: LiveOpsStore? = LiveOpsStore()
         store?.attach(provider: provider)
         store = nil
