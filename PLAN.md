@@ -132,25 +132,25 @@ Package rules for future kits:
 
 ---
 
-## [ ] Section 0 — Repo bootstrap
+## [x] Section 0 — Repo bootstrap
 
 **Goal.** An empty but well-formed repo.
 
-- [ ] `.gitignore`: `.build/`, `.swiftpm/`, `DerivedData/`, `*.xcodeproj` (the package doesn't commit one), `.DS_Store`
-- [ ] `README.md` stub: what FallKit is, the product list, status "pre-0.1"
-- [ ] `LICENSE` per Asgar's queue #3
-- [ ] `CLAUDE.md`, with these rules:
+- [x] `.gitignore`: `.build/`, `.swiftpm/`, `DerivedData/`, `*.xcodeproj` (the package doesn't commit one), `.DS_Store`
+- [x] `README.md` stub: what FallKit is, the product list, status "pre-0.1"
+- [x] `LICENSE` per Asgar's queue #3
+- [x] `CLAUDE.md`, with these rules:
   - public repo, no identifiers;
   - pure code in LiveOpsCore;
   - exactly one file imports FirebaseRemoteConfig;
   - the kit never writes to a console;
   - behaviour changes need a CHANGELOG entry.
-- [ ] `openspec init` (schema `spec-driven`), with the live-ops rule in `config.yaml` context
-- [ ] `.swiftlint.yml`, based on Huefall's and Wordfell's config: line length 140/200, type body 350, file 600
+- [x] `openspec init` (schema `spec-driven`), with the live-ops rule in `config.yaml` context
+- [x] `.swiftlint.yml`, based on Huefall's and Wordfell's config: line length 140/200, type body 350, file 600
 
 **Done when**
-- [ ] First commit pushed to `main`
-- [ ] `openspec validate --all` passes on the empty spec set
+- [x] First commit pushed to `main`
+- [x] `openspec validate --all` passes on the empty spec set
 
 ## [ ] Section 1 — Package manifest
 

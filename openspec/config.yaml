@@ -1,0 +1,30 @@
+schema: spec-driven
+
+context: |
+  FallKit: a public Swift package (SwiftPM, swift-tools 6.0, Swift 6 language mode) shared by
+  five iOS apps in ~/Documents/GitHub/OWN: StreakFlame (Streaklet/), Lineburst
+  (Blockfall(lineburst)/, targets named Blockrise), Boltfall, Huefall and Wordfell (Casual/).
+  Its first family of products is LiveOpsKit (LiveOpsCore, LiveOpsStore, LiveOpsFirebase,
+  LiveOpsTesting, the liveops CLI), extracted from the five apps' near-copy live-ops layers.
+  Lineburst is the reference implementation. The canonical rule is Docs/live-ops-rule.md.
+  The repo is public: never commit secrets, team IDs, Firebase project IDs, App Store app
+  IDs or account emails.
+
+rules:
+  proposal:
+    - >-
+      Work happens only in this repo. A change never edits an app repo; app adoption is
+      planned separately, in each app's own repo.
+    - >-
+      State whether the change alters behaviour for any of the five apps. A behaviour change
+      needs a CHANGELOG entry and a version bump (0.x minor until 1.0.0, then semver).
+  design:
+    - >-
+      LiveOpsCore imports Foundation only and never reads the clock, ProcessInfo or
+      UserDefaults; time and environment are injected. Exactly one file in the repo imports
+      FirebaseRemoteConfig (Sources/LiveOps/Firebase). Dependencies point downward:
+      Core <- Store <- Firebase/Testing.
+  specs:
+    - >-
+      Put MUST or SHALL on the first physical line of every requirement body; the validator
+      rejects it on a later line. Every requirement needs at least one "#### Scenario:".
