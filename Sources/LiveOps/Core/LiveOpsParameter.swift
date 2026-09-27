@@ -3,9 +3,9 @@ import Foundation
 /// One parameter a build reads, described for tests, the tooling and the manifest.
 public struct LiveOpsParameter: Hashable, Sendable {
     public enum ValueType: Hashable, Sendable {
-        /// An ISO-8601 instant with an offset (StreakFlame, Lineburst, Boltfall windows).
+        /// An ISO-8601 instant with an offset (instant windows).
         case instant
-        /// A `YYYY-MM-DD` calendar day (Huefall, Wordfell windows).
+        /// A `YYYY-MM-DD` calendar day (day windows).
         case day
         case bool
         /// A whole number inside inclusive bounds (rule #12).

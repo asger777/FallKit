@@ -50,7 +50,7 @@ struct ConsumerCheckApp: App {
         let now = Date()
         let eventStart = now, eventEnd = now.addingTimeInterval(86_400)
         let bundled = LiveOpsWindow(start: eventStart, end: eventEnd)            // Date, or LiveOpsDay for day windows
-        let override = LiveOpsResolve.windowOverride(kind: .event, id: "harvest-moon",
+        let override = LiveOpsResolve.windowOverride(kind: .event, id: "spring-sale",
                                                      values: store.values, parse: LiveOpsParse.instant)
         let phase = LiveOpsResolve.phase(bundled: bundled, override: override, at: now,
                                          end: .exclusive, whenDisabled: .removed)  // .upcoming / .live / .over / nil

@@ -11,7 +11,7 @@ public enum LiveOpsGate {
         public var arguments: [String]
         public var environment: [String: String]
         public var isTestHost: Bool
-        /// Supplied by the app (Lineburst `ScreenshotState`, Wordfell `ScreenshotMode`).
+        /// Supplied by the app, which knows how it runs screenshot captures.
         public var isScreenshotRun: Bool
 
         public init(arguments: [String], environment: [String: String] = [:], isTestHost: Bool = false,
@@ -43,15 +43,16 @@ public enum LiveOpsGate {
         public var blockedArguments: Set<String>
         /// Argument prefixes that block, e.g. `-debug.`, `--uitest`.
         public var blockedArgumentPrefixes: [String]
-        /// Flags that block when the environment has `FLAG=1` or the arguments
-        /// contain `-FLAG` (Lineburst's `BLOCKRISE_DISABLE_ANALYTICS`).
-        public var blockedFlags: [String]
+        /// Environment variables that block when they hold exactly this value,
+        /// e.g. `["APP_UITEST": "1"]`. For the argument form of the same switch,
+        /// add it to ``blockedArguments`` as well.
+        public var blockedEnvironment: [String: String]
 
         public init(blockedArguments: Set<String> = [], blockedArgumentPrefixes: [String] = [],
-                    blockedFlags: [String] = []) {
+                    blockedEnvironment: [String: String] = [:]) {
             self.blockedArguments = blockedArguments
             self.blockedArgumentPrefixes = blockedArgumentPrefixes
-            self.blockedFlags = blockedFlags
+            self.blockedEnvironment = blockedEnvironment
         }
 
         public static let none = Policy()
@@ -64,15 +65,14 @@ public enum LiveOpsGate {
             if policy.blockedArguments.contains(argument) { return false }
             if policy.blockedArgumentPrefixes.contains(where: { argument.hasPrefix($0) }) { return false }
         }
-        for flag in policy.blockedFlags
-        where launch.environment[flag] == "1" || launch.arguments.contains("-\(flag)") {
+        for (key, value) in policy.blockedEnvironment where launch.environment[key] == value {
             return false
         }
         return true
     }
 
-    /// The union of the five apps' checks: the `XCTestCase` class is loaded, or
-    /// Xcode's `XCTestConfigurationFilePath` is set.
+    /// Either XCTest signal: the `XCTestCase` class is loaded, or Xcode's
+    /// `XCTestConfigurationFilePath` is set. An Xcode test host sets both.
     public static func isTestHost(classExists: Bool, environment: [String: String]) -> Bool {
         classExists || environment[testConfigurationVariable] != nil
     }

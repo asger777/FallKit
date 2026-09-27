@@ -138,7 +138,7 @@ struct DayWindowTests {
     let bundled = LiveOpsWindow(start: calendarDay("2026-10-24"), end: calendarDay("2026-11-06"))
 
     func override(_ values: LiveOpsValues) -> LiveOpsWindowOverride<LiveOpsDay> {
-        LiveOpsResolve.windowOverride(kind: .collection, id: "halloween", values: values, parse: LiveOpsParse.day)
+        LiveOpsResolve.windowOverride(kind: "collection", id: "halloween", values: values, parse: LiveOpsParse.day)
     }
 
     func phase(_ values: LiveOpsValues, on text: String, whenDisabled: LiveOpsDisabled = .removed) -> LiveOpsPhase? {

@@ -1,9 +1,8 @@
 import LiveOpsCore
 import LiveOpsStore
 
-/// A provider for tests: no SDK, no network. Covers both stub shapes the apps
-/// used: activation inside `fetch` (StreakFlame, Lineburst, Huefall) and
-/// activation later, driven by the test (Boltfall, Wordfell).
+/// A provider for tests: no SDK, no network. Activation can complete inside
+/// `fetch`, or later when the test calls ``activate(_:)``.
 @MainActor
 public final class MemoryLiveOpsProvider: LiveOpsProviding {
     public enum Activation: Sendable {
@@ -38,9 +37,8 @@ public final class MemoryLiveOpsProvider: LiveOpsProviding {
 
     /// Delivers `values` as the console's latest activation: completes every
     /// pending fetch, or, when none is pending, re-delivers to the most recent
-    /// fetch's callback. Like the Boltfall and Wordfell stubs, every `activate`
-    /// reaches the store once a fetch has started; before any fetch it only
-    /// changes ``current``.
+    /// fetch's callback, so every `activate` reaches the store once a fetch has
+    /// started. Before any fetch it only changes ``current``.
     public func activate(_ values: LiveOpsValues) {
         current = values
         guard !pending.isEmpty else {

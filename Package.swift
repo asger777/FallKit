@@ -1,5 +1,5 @@
 // swift-tools-version: 6.0
-// FallKit: Swift packages shared by StreakFlame, Lineburst, Boltfall, Huefall and Wordfell.
+// FallKit: standalone Swift package kits for iOS apps.
 // Layout and rules: CLAUDE.md. One folder per kit under Sources/ and Tests/.
 
 import PackageDescription
@@ -20,9 +20,9 @@ let package = Package(
         .executable(name: "liveops", targets: ["LiveOpsCLI"]),
     ],
     dependencies: [
-        // A range, not an exact version: every app keeps its own exact pin
-        // (Boltfall 12.17.0, the others 12.18.0) and SwiftPM resolves one copy.
-        // The URL is spelled exactly as the apps spell it, so it is the same package.
+        // A range, not an exact version: an app keeps its own exact pin and SwiftPM
+        // resolves one copy. 12.17.0 is the lowest version the consumer check builds.
+        // Apps must spell the URL the same way for SwiftPM to see one package.
         .package(url: "https://github.com/firebase/firebase-ios-sdk", "12.17.0"..<"13.0.0"),
     ],
     targets: [

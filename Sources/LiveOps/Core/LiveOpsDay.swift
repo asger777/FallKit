@@ -1,7 +1,7 @@
 import Foundation
 
 /// A calendar day, `YYYY-MM-DD`, for windows that mean "the same calendar day
-/// wherever you are" (Huefall seasons, Wordfell collections). Never an instant.
+/// wherever you are". Never an instant.
 public struct LiveOpsDay: Hashable, Comparable, Sendable, Codable, CustomStringConvertible {
     public let year: Int
     public let month: Int

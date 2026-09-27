@@ -1,8 +1,7 @@
 import Foundation
 
 /// A bundled window: an event, season or collection runs from `start` to `end`.
-/// `T` is `Date` for instant windows (StreakFlame, Lineburst, Boltfall) or
-/// ``LiveOpsDay`` for day windows (Huefall, Wordfell).
+/// `T` is `Date` for instant windows or ``LiveOpsDay`` for day windows.
 public struct LiveOpsWindow<T: Comparable & Sendable>: Sendable {
     public var start: T
     public var end: T
@@ -50,9 +49,9 @@ public enum LiveOpsWindowType: String, Sendable, Codable {
 
 /// Whether the end of a window is still inside it.
 public enum LiveOpsWindowEnd: String, Sendable, Codable {
-    /// `start <= t < end`: instant windows (StreakFlame, Lineburst, Boltfall).
+    /// `start <= t < end`: the end is the first moment after the window. The usual choice for instant windows.
     case exclusive
-    /// `start <= t <= end`: day windows, where the end day is the last day (Huefall, Wordfell).
+    /// `start <= t <= end`: the end is the last moment inside it. The usual choice for day windows, where the end day is the last day.
     case inclusive
 }
 
@@ -65,9 +64,10 @@ public enum LiveOpsPhase: String, Sendable, Codable {
 
 /// What `enabled=false` does to a window.
 public enum LiveOpsDisabled: String, Sendable, Codable {
-    /// The window is gone: no phase at all (StreakFlame, Lineburst, Boltfall, Wordfell).
+    /// The window is gone: no phase at all. The recommended default.
     case removed
-    /// The window is closed: upcoming before its start, over from its start on (Huefall).
+    /// The window is closed: upcoming before its start, over from its start on. Use it when a
+    /// disabled window must still be shown, for example as "ended".
     case closed
 }
 

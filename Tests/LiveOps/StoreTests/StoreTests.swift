@@ -137,12 +137,13 @@ struct GateTests {
         #expect(LiveOpsGate.shouldFetch(Launch(arguments: ["-ads.useAdMob", "1"]), policy: policy))
     }
 
-    @Test("a blocked flag blocks as FLAG=1 in the environment or as -FLAG")
-    func blockedFlags() {
-        let policy = LiveOpsGate.Policy(blockedFlags: ["APP_DISABLE_ANALYTICS"])
-        #expect(!LiveOpsGate.shouldFetch(Launch(arguments: [], environment: ["APP_DISABLE_ANALYTICS": "1"]), policy: policy))
-        #expect(!LiveOpsGate.shouldFetch(Launch(arguments: ["-APP_DISABLE_ANALYTICS"]), policy: policy))
-        #expect(LiveOpsGate.shouldFetch(Launch(arguments: [], environment: ["APP_DISABLE_ANALYTICS": "0"]), policy: policy))
+    @Test("a blocked environment value blocks only on an exact match")
+    func blockedEnvironment() {
+        let policy = LiveOpsGate.Policy(blockedArguments: ["-APP_UITEST"], blockedEnvironment: ["APP_UITEST": "1"])
+        #expect(!LiveOpsGate.shouldFetch(Launch(arguments: [], environment: ["APP_UITEST": "1"]), policy: policy))
+        #expect(!LiveOpsGate.shouldFetch(Launch(arguments: ["-APP_UITEST"]), policy: policy))
+        #expect(LiveOpsGate.shouldFetch(Launch(arguments: [], environment: ["APP_UITEST": "0"]), policy: policy))
+        #expect(LiveOpsGate.shouldFetch(Launch(arguments: [], environment: ["APP_UITEST": "1 "]), policy: policy))
         #expect(LiveOpsGate.shouldFetch(Launch(arguments: ["-APP_ANALYTICS_ON"]), policy: policy))
     }
 

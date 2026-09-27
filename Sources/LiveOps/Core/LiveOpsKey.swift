@@ -1,13 +1,13 @@
 /// Parameter naming (rule #3): `<kind>_<id>_<field>`.
 public enum LiveOpsKey {
-    /// `<kind>_<sanitised id>_<field>`, for example `event_harvest_moon_start`.
+    /// `<kind>_<sanitised id>_<field>`, for example `event_spring_sale_start`.
     public static func name(_ kind: LiveOpsKind, id: String, field: String) -> String {
         "\(kind.rawValue)_\(sanitise(id))_\(field)"
     }
 
     /// Remote Config rejects any key with a character outside `[a-zA-Z0-9_]`
     /// (the console says INVALID_KEY), which hyphenated bundled ids would
-    /// otherwise trip: `harvest-moon` → `harvest_moon`. One `_` per Unicode
+    /// otherwise trip: `spring-sale` → `spring_sale`. One `_` per Unicode
     /// scalar; letter case is kept (`pt-BR` → `pt_BR`).
     public static func sanitise(_ id: String) -> String {
         String(id.unicodeScalars.map { scalar -> Character in

@@ -106,9 +106,9 @@ enum InAppEventCheck {
         return mismatches
     }
 
-    /// The manifest's `inAppEvent` reference name, or, without one, Lineburst's
-    /// rule: the reference name or deep link mentions the window id, as written
-    /// or sanitised.
+    /// The manifest's `inAppEvent` reference name, or, without one, the id rule:
+    /// the reference name or deep link mentions the window id, as written or
+    /// sanitised.
     static func accompanies(_ attributes: InAppEventAttributes, _ window: LiveOpsManifest.Window) -> Bool {
         if let reference = window.inAppEvent {
             return attributes.referenceName?.caseInsensitiveCompare(reference) == .orderedSame

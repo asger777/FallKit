@@ -4,9 +4,9 @@
 
 ## 2. Public API (PLAN §15)
 
-- [ ] 2.1 LiveOpsKind: rule kinds only
-- [ ] 2.2 LiveOpsGate.Policy.blockedEnvironment
-- [ ] 2.3 Neutral doc comments in every source file and Package.swift
+- [x] 2.1 LiveOpsKind: rule kinds only
+- [x] 2.2 LiveOpsGate.Policy.blockedEnvironment
+- [x] 2.3 Neutral doc comments in every source file and Package.swift
 
 ## 3. Testing product (PLAN §16)
 

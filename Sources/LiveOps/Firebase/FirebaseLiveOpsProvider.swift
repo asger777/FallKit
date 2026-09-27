@@ -10,7 +10,7 @@ import LiveOpsCore
 import LiveOpsStore
 
 /// The Remote Config transport for every live-ops override (rule #8): the
-/// **only** type in the portfolio that imports `FirebaseRemoteConfig`
+/// **only** type in the kit that imports `FirebaseRemoteConfig`
 /// (`Scripts/check-boundary.sh` fails on a second importer).
 ///
 /// Deliberately dumb: it reads a fixed key list (the app's parameter keys) and

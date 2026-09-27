@@ -57,15 +57,15 @@ The kit's text, sample data, one constant, one gate rule and its shipped fixture
 **Done when**
 - [x] `openspec validate make-kit-standalone --strict` passes
 
-## [ ] Section 15 — Neutral public API
+## [x] Section 15 — Neutral public API
 
-- [ ] `LiveOpsKind`: constants for the rule's kinds only (`event`, `season`, `feature`, `ad`, `offer`, `promo`); any other kind is a literal
-- [ ] `LiveOpsGate.Policy`: `blockedFlags` replaced by `blockedEnvironment: [String: String]`, matching exact values
-- [ ] Every doc comment in `Sources/` and `Package.swift` describes behaviour, not consumers
+- [x] `LiveOpsKind`: constants for the rule's kinds only (`event`, `season`, `feature`, `ad`, `offer`, `promo`); any other kind is a literal
+- [x] `LiveOpsGate.Policy`: `blockedFlags` replaced by `blockedEnvironment: [String: String]`, matching exact values
+- [x] Every doc comment in `Sources/` and `Package.swift` describes behaviour, not consumers
 
 **Done when**
-- [ ] No consumer word in `Sources/`, `Package.swift` or `Examples/`
-- [ ] The gate passes
+- [x] No consumer word in `Sources/`, `Package.swift` or `Examples/`, apart from the fixture files, which move in Section 16
+- [x] The gate passes
 
 ## [ ] Section 16 — Testing product
 
