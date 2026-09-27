@@ -7,3 +7,4 @@ DerivedData/
 xcuserdata/
 /Examples/*/build/
 /build/
+.fallkit-forbidden-words
