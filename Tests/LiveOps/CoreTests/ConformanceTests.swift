@@ -52,8 +52,10 @@ struct GoldenTests {
             .bool("event_sale_enabled", bundled: true),
             .int("ad_every_n", bounds: 1...10, bundled: 3),
         ],
-        windows: [LiveOpsManifest.Window(kind: .event, id: "sale", type: .instant, start: "2026-10-01T00:00:00Z",
-                                         end: "2026-10-16T00:00:00Z", endPolicy: .exclusive, whenDisabled: .removed)]
+        windows: [
+            LiveOpsManifest.Window(kind: .event, id: "sale", type: .instant, start: "2026-10-01T00:00:00Z",
+                                   end: "2026-10-16T00:00:00Z", endPolicy: .exclusive, whenDisabled: .removed),
+        ]
     )
 
     @Test("an empty list when probes and report match")
