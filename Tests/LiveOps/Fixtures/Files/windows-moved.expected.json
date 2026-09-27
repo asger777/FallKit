@@ -3,52 +3,52 @@
     {
       "at" : "2026-09-23T23:59:59Z",
       "phase" : "upcoming",
-      "window" : "event/harvest-moon"
+      "window" : "event/spring-sale"
     },
     {
       "at" : "2026-09-24T00:00:00Z",
       "phase" : "live",
-      "window" : "event/harvest-moon"
+      "window" : "event/spring-sale"
     },
     {
       "at" : "2026-10-30T19:59:59Z",
       "phase" : "live",
-      "window" : "event/harvest-moon"
+      "window" : "event/spring-sale"
     },
     {
       "at" : "2026-10-30T20:00:00Z",
       "phase" : "over",
-      "window" : "event/harvest-moon"
+      "window" : "event/spring-sale"
     },
     {
       "at" : "2026-10-31",
       "phase" : "live",
-      "window" : "season/harvest_2026"
+      "window" : "season/summer_2026"
     },
     {
       "at" : "2026-11-01",
       "phase" : "over",
-      "window" : "season/harvest_2026"
+      "window" : "season/summer_2026"
     },
     {
       "at" : "2026-10-16",
       "phase" : "upcoming",
-      "window" : "collection/halloween"
+      "window" : "collection/winter_market"
     },
     {
       "at" : "2026-10-17",
       "phase" : "live",
-      "window" : "collection/halloween"
+      "window" : "collection/winter_market"
     },
     {
       "at" : "2026-10-30",
       "phase" : "live",
-      "window" : "collection/halloween"
+      "window" : "collection/winter_market"
     },
     {
       "at" : "2026-10-31",
       "phase" : "over",
-      "window" : "collection/halloween"
+      "window" : "collection/winter_market"
     }
   ],
   "report" : {
@@ -57,7 +57,7 @@
         "bundled" : "2026-10-01T00:00:00Z",
         "console" : "2026-09-24T00:00:00Z",
         "effective" : "2026-09-24T00:00:00Z",
-        "name" : "event_harvest_moon_start",
+        "name" : "event_spring_sale_start",
         "reading" : "applied",
         "type" : "instant"
       },
@@ -65,21 +65,21 @@
         "bundled" : "2026-10-16T00:00:00Z",
         "console" : "2026-10-31T00:00:00+04:00",
         "effective" : "2026-10-30T20:00:00Z",
-        "name" : "event_harvest_moon_end",
+        "name" : "event_spring_sale_end",
         "reading" : "applied",
         "type" : "instant"
       },
       {
         "bundled" : "true",
         "effective" : "true",
-        "name" : "event_harvest_moon_enabled",
+        "name" : "event_spring_sale_enabled",
         "reading" : "unset",
         "type" : "bool"
       },
       {
         "bundled" : "2026-10-15",
         "effective" : "2026-10-15",
-        "name" : "season_harvest_2026_start",
+        "name" : "season_summer_2026_start",
         "reading" : "unset",
         "type" : "day"
       },
@@ -87,14 +87,14 @@
         "bundled" : "2026-11-14",
         "console" : "2026-10-31",
         "effective" : "2026-10-31",
-        "name" : "season_harvest_2026_end",
+        "name" : "season_summer_2026_end",
         "reading" : "applied",
         "type" : "day"
       },
       {
         "bundled" : "true",
         "effective" : "true",
-        "name" : "season_harvest_2026_enabled",
+        "name" : "season_summer_2026_enabled",
         "reading" : "unset",
         "type" : "bool"
       },
@@ -102,7 +102,7 @@
         "bundled" : "2026-10-24",
         "console" : "2026-10-17",
         "effective" : "2026-10-17",
-        "name" : "collection_halloween_start",
+        "name" : "collection_winter_market_start",
         "reading" : "applied",
         "type" : "day"
       },
@@ -110,49 +110,49 @@
         "bundled" : "2026-11-06",
         "console" : "2026-10-30",
         "effective" : "2026-10-30",
-        "name" : "collection_halloween_end",
+        "name" : "collection_winter_market_end",
         "reading" : "applied",
         "type" : "day"
       },
       {
         "bundled" : "true",
         "effective" : "true",
-        "name" : "collection_halloween_enabled",
+        "name" : "collection_winter_market_enabled",
         "reading" : "unset",
         "type" : "bool"
       },
       {
         "bundled" : "true",
         "effective" : "true",
-        "name" : "feature_adventure_enabled",
+        "name" : "feature_dark_mode_enabled",
         "reading" : "unset",
         "type" : "bool"
       },
       {
         "bundled" : "false",
         "effective" : "false",
-        "name" : "feature_zen_enabled",
+        "name" : "feature_beta_tools_enabled",
         "reading" : "unset",
         "type" : "bool"
       },
       {
         "bundled" : "true",
         "effective" : "true",
-        "name" : "ad_undo_enabled",
+        "name" : "ad_rewarded_hint_enabled",
         "reading" : "unset",
         "type" : "bool"
       },
       {
         "bundled" : "3",
         "effective" : "3",
-        "name" : "ad_undo_free_per_run",
+        "name" : "ad_free_hints_per_day",
         "reading" : "unset",
         "type" : "int"
       },
       {
         "bundled" : "3",
         "effective" : "3",
-        "name" : "ads_interstitial_cadence",
+        "name" : "ad_interstitial_every_n",
         "reading" : "unset",
         "type" : "int"
       }
@@ -163,21 +163,21 @@
         "end" : "2026-10-30T20:00:00Z",
         "start" : "2026-09-24T00:00:00Z",
         "whenDisabled" : "removed",
-        "window" : "event/harvest-moon"
+        "window" : "event/spring-sale"
       },
       {
         "disabled" : false,
         "end" : "2026-10-31",
         "start" : "2026-10-15",
         "whenDisabled" : "closed",
-        "window" : "season/harvest_2026"
+        "window" : "season/summer_2026"
       },
       {
         "disabled" : false,
         "end" : "2026-10-30",
         "start" : "2026-10-17",
         "whenDisabled" : "removed",
-        "window" : "collection/halloween"
+        "window" : "collection/winter_market"
       }
     ]
   }

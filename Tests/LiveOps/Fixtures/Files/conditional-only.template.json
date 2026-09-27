@@ -1,0 +1,3 @@
+{ "parameters": {
+  "feature_dark_mode_enabled": { "defaultValue": { "useInAppDefault": true }, "conditionalValues": { "beta": { "value": "false" } } },
+  "ad_free_hints_per_day": { "defaultValue": { "value": "4" }, "conditionalValues": { "beta": { "value": "1" } } } } }

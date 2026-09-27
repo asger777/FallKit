@@ -1,4 +1,0 @@
-{ "parameters": {
-  "feature_adventure_enabled": { "defaultValue": { "useInAppDefault": true } },
-  "ad_undo_free_per_run": { "defaultValue": { "useInAppDefault": true } },
-  "event_harvest_moon_end": { "defaultValue": { "useInAppDefault": true } } } }

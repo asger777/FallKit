@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "app": "FallKit fixtures",
+  "parameters": [
+    { "name": "event_spring_sale_start", "type": "instant", "bundled": "2026-10-01T00:00:00Z" },
+    { "name": "event_spring_sale_end", "type": "instant", "bundled": "2026-10-16T00:00:00Z" },
+    { "name": "event_spring_sale_enabled", "type": "bool", "bundled": "true" },
+    { "name": "season_summer_2026_start", "type": "day", "bundled": "2026-10-15" },
+    { "name": "season_summer_2026_end", "type": "day", "bundled": "2026-11-14" },
+    { "name": "season_summer_2026_enabled", "type": "bool", "bundled": "true" },
+    { "name": "collection_winter_market_start", "type": "day", "bundled": "2026-10-24" },
+    { "name": "collection_winter_market_end", "type": "day", "bundled": "2026-11-06" },
+    { "name": "collection_winter_market_enabled", "type": "bool", "bundled": "true" },
+    { "name": "feature_dark_mode_enabled", "type": "bool", "bundled": "true" },
+    { "name": "feature_beta_tools_enabled", "type": "bool", "bundled": "false" },
+    { "name": "ad_rewarded_hint_enabled", "type": "bool", "bundled": "true" },
+    { "name": "ad_free_hints_per_day", "type": "int", "min": 1, "max": 5, "bundled": "3" },
+    { "name": "ad_interstitial_every_n", "type": "int", "min": 3, "max": 10, "bundled": "3" }
+  ],
+  "windows": [
+    { "kind": "event", "id": "spring-sale", "type": "instant", "start": "2026-10-01T00:00:00Z", "end": "2026-10-16T00:00:00Z",
+      "endPolicy": "exclusive", "whenDisabled": "removed", "inAppEvent": "Spring Sale" },
+    { "kind": "season", "id": "summer_2026", "type": "day", "start": "2026-10-15", "end": "2026-11-14",
+      "endPolicy": "inclusive", "whenDisabled": "closed" },
+    { "kind": "collection", "id": "winter_market", "type": "day", "start": "2026-10-24", "end": "2026-11-06",
+      "endPolicy": "inclusive", "whenDisabled": "removed" }
+  ]
+}

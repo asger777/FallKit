@@ -1,3 +1,0 @@
-{ "parameters": {
-  "feature_adventure_enabled": { "defaultValue": { "useInAppDefault": true }, "conditionalValues": { "beta": { "value": "false" } } },
-  "ad_undo_free_per_run": { "defaultValue": { "value": "4" }, "conditionalValues": { "beta": { "value": "1" } } } } }

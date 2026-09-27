@@ -1,0 +1,4 @@
+{ "parameters": {
+  "feature_dark_mode_enabled": { "defaultValue": { "useInAppDefault": true } },
+  "ad_free_hints_per_day": { "defaultValue": { "useInAppDefault": true } },
+  "event_spring_sale_end": { "defaultValue": { "useInAppDefault": true } } } }

@@ -10,8 +10,8 @@
 
 ## 3. Testing product (PLAN §16)
 
-- [ ] 3.1 LiveOpsGolden and LiveOpsGoldenExpectation in LiveOpsTesting
-- [ ] 3.2 Non-product LiveOpsTestFixtures target with neutral fixtures; re-record and review
+- [x] 3.1 LiveOpsGolden and LiveOpsGoldenExpectation in LiveOpsTesting
+- [x] 3.2 Non-product LiveOpsTestFixtures target with neutral fixtures; re-record and review
 
 ## 4. Tests (PLAN §17)
 

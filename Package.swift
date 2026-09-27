@@ -54,8 +54,7 @@ let package = Package(
         .target(
             name: "LiveOpsTesting",
             dependencies: ["LiveOpsStore"],
-            path: "Sources/LiveOps/Testing",
-            resources: [.copy("Fixtures")]
+            path: "Sources/LiveOps/Testing"
         ),
         .executableTarget(
             name: "LiveOpsCLI",
@@ -63,19 +62,27 @@ let package = Package(
             path: "Sources/LiveOps/CLI"
         ),
 
+        // Test-only: the kit's conformance fixtures. Not a product, never shipped.
+        .target(
+            name: "LiveOpsTestFixtures",
+            dependencies: ["LiveOpsCore", "LiveOpsTesting"],
+            path: "Tests/LiveOps/Fixtures",
+            resources: [.copy("Files")]
+        ),
+
         .testTarget(
             name: "LiveOpsCoreTests",
-            dependencies: ["LiveOpsCore", "LiveOpsTesting"],
+            dependencies: ["LiveOpsCore", "LiveOpsTesting", "LiveOpsTestFixtures"],
             path: "Tests/LiveOps/CoreTests"
         ),
         .testTarget(
             name: "LiveOpsStoreTests",
-            dependencies: ["LiveOpsStore", "LiveOpsTesting"],
+            dependencies: ["LiveOpsStore", "LiveOpsTesting", "LiveOpsTestFixtures"],
             path: "Tests/LiveOps/StoreTests"
         ),
         .testTarget(
             name: "LiveOpsCLITests",
-            dependencies: ["LiveOpsCLI", "LiveOpsCore", "LiveOpsTesting"],
+            dependencies: ["LiveOpsCLI", "LiveOpsCore", "LiveOpsTesting", "LiveOpsTestFixtures"],
             path: "Tests/LiveOps/CLITests"
         ),
     ],

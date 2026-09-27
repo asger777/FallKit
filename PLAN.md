@@ -67,15 +67,16 @@ The kit's text, sample data, one constant, one gate rule and its shipped fixture
 - [x] No consumer word in `Sources/`, `Package.swift` or `Examples/`, apart from the fixture files, which move in Section 16
 - [x] The gate passes
 
-## [ ] Section 16 — Testing product
+## [x] Section 16 — Testing product
 
-- [ ] `LiveOpsGolden.mismatches(manifest:values:expected:)` and `LiveOpsGoldenExpectation` / `LiveOpsGoldenProbe` in `LiveOpsTesting`
-- [ ] The kit's fixtures move to a non-product `LiveOpsTestFixtures` target (`Tests/LiveOps/Fixtures`), with neutral sample ids
-- [ ] Probes re-written by hand for the new ids; reports re-recorded and reviewed
+- [x] `LiveOpsGolden.mismatches(manifest:values:expected:)` and `LiveOpsGoldenExpectation` / `LiveOpsGoldenProbe` in `LiveOpsTesting`
+- [x] The kit's fixtures move to a non-product `LiveOpsTestFixtures` target (`Tests/LiveOps/Fixtures`), with neutral sample ids
+- [x] Probes re-written by hand for the new ids; reports re-recorded and reviewed
+  > The rename is mechanical (only ids changed; dates, values and phases did not). As proof, the old expected files with the same rename applied are identical to the re-recorded ones.
 
 **Done when**
-- [ ] `LiveOpsTesting` ships no fixture files
-- [ ] Every probe and report passes through `LiveOpsGolden`
+- [x] `LiveOpsTesting` ships no fixture files
+- [x] Every probe and report passes through `LiveOpsGolden`
 
 ## [ ] Section 17 — Tests
 

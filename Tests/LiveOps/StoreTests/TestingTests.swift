@@ -1,5 +1,6 @@
 import LiveOpsCore
 import LiveOpsStore
+import LiveOpsTestFixtures
 import LiveOpsTesting
 import Testing
 
@@ -52,28 +53,28 @@ struct MemoryProviderTests {
     }
 }
 
-@Suite("LiveOpsFixtures")
+@Suite("Test fixtures")
 struct FixtureLoaderTests {
     @Test("fixtures are bundled and listed by name")
     func names() {
-        #expect(LiveOpsFixtures.names.contains("grouped"))
+        #expect(TestFixtures.names.contains("grouped"))
     }
 
     @Test("a fixture loads as console-set values only")
     func smoke() throws {
-        let template = try LiveOpsFixtures.template("grouped")
+        let template = try TestFixtures.template("grouped")
         #expect(template.values == [
-            "feature_adventure_enabled": "false",
-            "season_harvest_2026_end": "2026-11-30",
-            "ad_undo_free_per_run": "1",
+            "feature_dark_mode_enabled": "false",
+            "season_summer_2026_end": "2026-11-30",
+            "ad_free_hints_per_day": "1",
         ])
         #expect(template.conditionalKeys.isEmpty)
-        #expect(try LiveOpsFixtures.template("conditional-only").conditionalKeys == ["feature_adventure_enabled", "ad_undo_free_per_run"])
+        #expect(try TestFixtures.template("conditional-only").conditionalKeys == ["feature_dark_mode_enabled", "ad_free_hints_per_day"])
         #expect(template.version == "6")
     }
 
     @Test("a missing fixture names itself")
     func missing() {
-        #expect(throws: LiveOpsFixtures.Failure.self) { try LiveOpsFixtures.values("no-such-fixture") }
+        #expect(throws: TestFixtures.Failure.self) { try TestFixtures.values("no-such-fixture") }
     }
 }

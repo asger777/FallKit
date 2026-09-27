@@ -1,5 +1,6 @@
 import Foundation
 @testable import LiveOpsCLI
+import LiveOpsTestFixtures
 import LiveOpsTesting
 import Testing
 
@@ -10,7 +11,7 @@ private func run(_ arguments: [String]) -> (status: Int32, text: String) {
 }
 
 private func fixture(_ file: String) -> String {
-    LiveOpsFixtures.directory.appendingPathComponent(file).path
+    TestFixtures.directory.appendingPathComponent(file).path
 }
 
 private func temporary(_ json: String) throws -> String {
@@ -19,7 +20,7 @@ private func temporary(_ json: String) throws -> String {
     return url.path
 }
 
-private func appEvents(state: String = "PUBLISHED", start: String, end: String, name: String = "Harvest Moon") -> String {
+private func appEvents(state: String = "PUBLISHED", start: String, end: String, name: String = "Spring Sale") -> String {
     """
     { "data": [ { "type": "appEvents", "id": "e1", "attributes": {
         "referenceName": "\(name)", "deepLink": "app://daily", "eventState": "\(state)",
@@ -51,19 +52,20 @@ struct CLITests {
         let result = run(["values", "--manifest", manifest, "--template", fixture("out-of-range.template.json")])
         #expect(result.status == 0)
         #expect(result.text.contains("FallKit fixtures: 14 parameters, 3 windows"))
-        let undo = result.text.split(separator: "\n").first { $0.hasPrefix("ad_undo_free_per_run ") }
+        let undo = result.text.split(separator: "\n").first { $0.hasPrefix("ad_free_hints_per_day ") }
         #expect(undo?.contains("OUT OF RANGE") == true)
         #expect(undo?.hasSuffix("  3") == true)
-        #expect(result.text.contains("event/harvest-moon    2026-10-01T00:00:00Z → 2026-10-16T00:00:00Z"))
+        let window = result.text.split(separator: "\n").first { $0.hasPrefix("event/spring-sale ") }
+        #expect(window?.hasSuffix("  2026-10-01T00:00:00Z → 2026-10-16T00:00:00Z") == true)
     }
 
     @Test("values warns about conditional values, unknown keys and disabled windows")
     func warnings() {
         let conditional = run(["values", "--manifest", manifest, "--template", fixture("conditional-only.template.json")])
-        #expect(conditional.text.contains("⚠︎ feature_adventure_enabled has conditional values"))
+        #expect(conditional.text.contains("⚠︎ feature_dark_mode_enabled has conditional values"))
         let unknown = run(["values", "--manifest", manifest, "--template", fixture("unknown-ids.template.json")])
         #expect(unknown.text.contains("console key(s) this build never reads"))
-        #expect(unknown.text.contains("event_winter_2026_enabled"))
+        #expect(unknown.text.contains("event_autumn_2026_enabled"))
         let disabled = run(["values", "--manifest", manifest, "--template", fixture("windows-disabled.template.json")])
         #expect(disabled.text.contains("DISABLED (closed)"))
         #expect(disabled.text.contains("DISABLED (removed)"))
@@ -95,7 +97,7 @@ struct CLITests {
                           "--app-events", events,
         ])
         #expect(result.status == 0, "\(result.text)")
-        #expect(result.text.contains("✓ event/harvest-moon ↔ \"Harvest Moon\" schedule 1 (2 territories) matches"))
+        #expect(result.text.contains("✓ event/spring-sale ↔ \"Spring Sale\" schedule 1 (2 territories) matches"))
         #expect(result.text.contains("no In-App Event accompanies it"))
     }
 
@@ -106,7 +108,7 @@ struct CLITests {
                           "--app-events", events,
         ])
         #expect(result.status == 1)
-        #expect(result.text.contains("✗ event/harvest-moon ↔ \"Harvest Moon\" schedule 1"))
+        #expect(result.text.contains("✗ event/spring-sale ↔ \"Spring Sale\" schedule 1"))
         #expect(result.text.contains("1 mismatch(es)"))
     }
 
@@ -118,12 +120,12 @@ struct CLITests {
         let archived = try temporary(appEvents(state: "ARCHIVED", start: "2026-10-01T00:00:00Z", end: "2026-10-16T00:00:00Z"))
         let result = run(["check-inapp-events", "--manifest", manifest, "--template", template, "--app-events", archived])
         #expect(result.status == 0)
-        #expect(result.text.contains("is disabled and In-App Event \"Harvest Moon\" is ARCHIVED"))
+        #expect(result.text.contains("is disabled and In-App Event \"Spring Sale\" is ARCHIVED"))
     }
 
     @Test("an event without a schedule is a mismatch; missing --app-events is a usage error")
     func inAppEventsEdges() throws {
-        let bare = try temporary(#"{ "data": [ { "attributes": { "referenceName": "Harvest Moon", "eventState": "PUBLISHED" } } ] }"#)
+        let bare = try temporary(#"{ "data": [ { "attributes": { "referenceName": "Spring Sale", "eventState": "PUBLISHED" } } ] }"#)
         let result = run(["check-inapp-events", "--manifest", manifest, "--template", fixture("empty.template.json"),
                           "--app-events", bare,
         ])
@@ -134,21 +136,21 @@ struct CLITests {
 
     @Test("matching: the manifest's reference name, else Lineburst's id rule")
     func accompanies() throws {
-        let manifest = try LiveOpsFixtures.catalog()
-        let event = try #require(manifest.window("event/harvest-moon"))
-        var byName = InAppEventAttributes(referenceName: "harvest moon")
+        let manifest = try TestFixtures.catalog()
+        let event = try #require(manifest.window("event/spring-sale"))
+        var byName = InAppEventAttributes(referenceName: "spring sale")
         #expect(InAppEventCheck.accompanies(byName, event))
         byName.referenceName = "Winter Lights"
         #expect(!InAppEventCheck.accompanies(byName, event))
-        let season = try #require(manifest.window("season/harvest_2026"))
-        #expect(InAppEventCheck.accompanies(.init(referenceName: "Season HARVEST_2026"), season))
-        #expect(InAppEventCheck.accompanies(.init(deepLink: "app://season/harvest_2026"), season))
+        let season = try #require(manifest.window("season/summer_2026"))
+        #expect(InAppEventCheck.accompanies(.init(referenceName: "Season SUMMER_2026"), season))
+        #expect(InAppEventCheck.accompanies(.init(deepLink: "app://season/summer_2026"), season))
         #expect(!InAppEventCheck.accompanies(.init(referenceName: "Spring"), season))
     }
 
     @Test("a day window's event is reported, not checked")
     func dayWindowNotChecked() throws {
-        let events = try temporary(appEvents(start: "2026-10-15T00:00:00Z", end: "2026-11-15T00:00:00Z", name: "Season harvest_2026"))
+        let events = try temporary(appEvents(start: "2026-10-15T00:00:00Z", end: "2026-11-15T00:00:00Z", name: "Season summer_2026"))
         let result = run(["check-inapp-events", "--manifest", manifest, "--template", fixture("empty.template.json"),
                           "--app-events", events,
         ])

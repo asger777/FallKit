@@ -1,0 +1,1 @@
+{ "parameters": { "ad_free_hints_per_day": { "defaultValue": { "value": "6" } }, "ad_interstitial_every_n": { "defaultValue": { "value": "99" } } } }

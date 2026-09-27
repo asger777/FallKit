@@ -1,1 +1,0 @@
-{ "parameters": { "event_harvest_moon_end": { "defaultValue": { "value": "2026-09-01T00:00:00Z" } }, "season_harvest_2026_start": { "defaultValue": { "value": "2026-11-20" } }, "collection_halloween_start": { "defaultValue": { "value": "2026-11-20" } } } }

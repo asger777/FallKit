@@ -1,0 +1,1 @@
+{ "parameters": { "feature_dark_mode_enabled": { "defaultValue": { "value": "false" } }, "ad_rewarded_hint_enabled": { "defaultValue": { "value": "0" } }, "feature_beta_tools_enabled": { "defaultValue": { "value": "NO" } } } }
